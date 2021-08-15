@@ -1,5 +1,5 @@
 FROM alpine:latest as devenv
-RUN apk add --no-cache cmake gcc g++ libstdc++ ninja
+RUN apk add --no-cache cmake gcc g++ libstdc++ ninja ca-certificates curl libarchive-tools
 ARG USER=dockerusr
 ARG UID=1000
 ARG DOCKER_GID=1234

@@ -1,0 +1,16 @@
+FROM ubuntu:focal as devenv
+
+RUN apt-get update -qq && \
+  apt-get upgrade -y && \
+  DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y cmake ninja-build build-essential ca-certificates curl libarchive-tools && \
+  rm -rf /var/lib/apt/lists/*
+
+ARG USER=dockerusr
+ARG UID=1000
+ARG DOCKER_GID=1234
+RUN addgroup --gid "${DOCKER_GID}" docker && \
+  adduser --disabled-password --gecos "" --uid "${UID}" "${USER}" && \ 
+  adduser "${USER}" docker
+
+USER ${USER}
+WORKDIR /workspace
