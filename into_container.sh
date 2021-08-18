@@ -1,10 +1,18 @@
 #!/bin/bash
-set -euo pipefail
+set -uo pipefail
 shopt -s nullglob globstar
+
+container_shell=sh
+
+container_name=${PROJECT_DOCKER_NAME}-dev-container_name
+
+docker container inspect $container_name > /dev/null 2>&1
+ret=$?
+[[ $ret -eq 0 ]] && docker exec -it $container_name $container_shell && return
 
 docker run --rm -it \
   --network host \
+  --name $container_name \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v ${PROJECT_DOCKER_WORKSPACE}:/workspace \
-  -v ~/.vscode-server:/home/${PROJECT_DOCKER_USER}/.vscode-server \
-  ${PROJECT_DOCKER_NAME}-dev:latest sh
+  ${PROJECT_DOCKER_NAME}-dev:latest $container_shell
