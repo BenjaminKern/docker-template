@@ -1,7 +1,6 @@
-FROM ubuntu:focal as devenv
+FROM ubuntu:focal
 
 RUN apt-get update -qq && \
-  apt-get upgrade -y && \
   DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y cmake ninja-build build-essential ca-certificates curl libarchive-tools && \
   rm -rf /var/lib/apt/lists/*
 
