@@ -8,7 +8,7 @@ container_name=${PROJECT_DOCKER_NAME}-dev-container_name
 
 docker container inspect $container_name > /dev/null 2>&1
 ret=$?
-[[ $ret -eq 0 ]] && docker exec -it $container_name $container_shell && return
+[[ $ret -eq 0 ]] && docker exec -it $container_name $container_shell
 
 docker run --rm -it \
   --network host \
