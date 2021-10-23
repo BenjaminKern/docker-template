@@ -2,17 +2,16 @@
 set -uo pipefail
 shopt -s nullglob globstar
 
-container_shell=sh
+IMAGE_PREFIX=$1
+CONTAINER_NAME=${IMAGE_PREFIX}-container
 
-container_name=${PROJECT_DOCKER_NAME}-dev-container_name
-
-docker container inspect $container_name > /dev/null 2>&1
+docker container inspect $CONTAINER_NAME > /dev/null 2>&1
 ret=$?
-[[ $ret -eq 0 ]] && docker exec -it $container_name $container_shell
+[[ $ret -eq 0 ]] && docker exec -it $CONTAINER_NAME bash
 
 docker run --rm -it \
   --network host \
-  --name $container_name \
+  --name $CONTAINER_NAME \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  -v ${PROJECT_DOCKER_WORKSPACE}:/workspace \
-  ${PROJECT_DOCKER_NAME}-dev:latest $container_shell
+  -v $(pwd)/workspace:/workspace \
+  ${IMAGE_PREFIX}-dev:latest bash

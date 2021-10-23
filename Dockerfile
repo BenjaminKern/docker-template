@@ -9,8 +9,7 @@ ARG USER=dockerusr
 ARG UID=1000
 ARG DOCKER_GID=1234
 RUN addgroup --gid "${DOCKER_GID}" docker && \
-  adduser --disabled-password --gecos "" --uid "${UID}" "${USER}" && \ 
-  adduser "${USER}" docker
+  useradd -c "" --no-log-init -u ${UID} -m -G docker "${USER}"
 
 USER ${USER}
 WORKDIR /workspace
