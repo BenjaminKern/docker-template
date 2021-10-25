@@ -8,4 +8,5 @@ DOCKER_BUILDKIT=1 docker build . \
   --build-arg DOCKER_GID="$(getent group docker | cut -d : -f 3)" \
   --build-arg USER="$(whoami)" \
   --build-arg UID="$(id -u)" \
+  --build-arg GID="$(id -g)" \
   -t "${IMAGE_PREFIX}-dev:latest"
