@@ -1,0 +1,7 @@
+localhost {
+  route /ttyd* {
+    uri strip_prefix /ttyd
+    reverse_proxy localhost:7681
+  }
+  file_server
+}

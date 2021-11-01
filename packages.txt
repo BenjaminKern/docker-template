@@ -3,4 +3,3 @@ ninja-build
 build-essential
 ca-certificates
 curl
-libarchive-tools
