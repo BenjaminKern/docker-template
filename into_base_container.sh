@@ -12,6 +12,7 @@ set -e
 
 docker run --rm -it \
   --network host \
+  --user $(whoami) \
   --name $CONTAINER_NAME \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v $(pwd)/workspace:/workspace \
