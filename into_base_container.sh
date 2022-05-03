@@ -14,6 +14,8 @@ docker run --rm -it \
   --network host \
   --user $(whoami) \
   --name $CONTAINER_NAME \
+  --cap-add=SYS_PTRACE \
+  --security-opt seccomp=unconfined \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v $(pwd)/workspace:/workspace \
   ${DOCKER_TAG} bash
