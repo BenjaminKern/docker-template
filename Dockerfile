@@ -15,6 +15,9 @@ RUN : \
   && useradd -c "" --no-log-init -u ${UID} -g ${GID} -m -G docker ${USER} \
   && echo $USER ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USER
 
+ENV PATH="/usr/lib/ccache/:$PATH"
+ENV CCACHE_DIR="/workspace/.ccache"
+
 FROM base as devenv
 RUN : \
   && mkdir /opt/bin \

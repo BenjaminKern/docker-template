@@ -3,3 +3,5 @@ build-essential
 ca-certificates
 curl
 libarchive-tools
+ccache
+patchelf
