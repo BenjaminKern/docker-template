@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-DOCKER_TAG=dev-$(git log -1 --pretty=%h)-base
+DOCKER_TAG=dev-$(git log -1 --pretty=%h)-devenv
 CONTAINER_NAME=${DOCKER_TAG}-container
 
 set +e
